@@ -12,7 +12,7 @@ public:
     ~MainMenuState() = default;
     MainMenuState();
 
-    virtual void handleEvent(sf::Event event);
+    virtual void handleEvent(sf::Window& window, sf::Event event);
     virtual void handleInput();
     virtual void update(sf::Time deltaTime);
     virtual void render(sf::RenderTarget& renderer);

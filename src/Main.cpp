@@ -1,22 +1,26 @@
 #include "Main.hpp"
+#include "Managers/StateManager.hpp"
 #include "States/MainMenuState.hpp"
+#include "States/StateBase.hpp"
 
 int main()
 {
+    rbk::StateManager stateManager;
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
-    rbk::MainMenuState mainMenu;
+    stateManager.addState(std::move(std::make_unique<rbk::MainMenuState>()));
 
-    while (window.isOpen())
+    while (window.isOpen() && stateManager.hasState())
     {
+        const std::unique_ptr<rbk::StateBase>& currentState(stateManager.currentState());
         sf::Event event;
+
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            currentState->handleEvent(window, event);
         }
 
-        mainMenu.render(window);
+        currentState->render(window);
         window.display();
     }
 

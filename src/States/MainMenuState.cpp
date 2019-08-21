@@ -15,8 +15,10 @@ MainMenuState::MainMenuState()
     }
 }
 
-void MainMenuState::handleEvent(sf::Event event)
+void MainMenuState::handleEvent(sf::Window& window, sf::Event event)
 {
+    if (event.type == sf::Event::Closed)
+        window.close();
 }
 
 void MainMenuState::handleInput()
