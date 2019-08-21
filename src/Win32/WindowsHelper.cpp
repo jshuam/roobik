@@ -8,12 +8,12 @@
  *****************************************************************************/
 WindowsHelper::WindowsHelper()
 {
-	// Get the icon directory
-	PBYTE iconDirectory = getIconDirectory(WIN32_ICON_MAIN);
+    // Get the icon directory
+    PBYTE iconDirectory = getIconDirectory(WIN32_ICON_MAIN);
 
-	// Store each icon
-	m_hIcon32 = getIconFromIconDirectory(iconDirectory, 32);
-	m_hIcon16 = getIconFromIconDirectory(iconDirectory, 16);
+    // Store each icon
+    m_hIcon32 = getIconFromIconDirectory(iconDirectory, 32);
+    m_hIcon16 = getIconFromIconDirectory(iconDirectory, 16);
 }
 
 /******************************************************************************
@@ -22,10 +22,10 @@ WindowsHelper::WindowsHelper()
  *****************************************************************************/
 void WindowsHelper::setIcon(const HWND& inHandle)
 {
-	if (m_hIcon32)
-		SendMessage(inHandle, WM_SETICON, ICON_BIG, (LPARAM)m_hIcon32);
-	if (m_hIcon16)
-		SendMessage(inHandle, WM_SETICON, ICON_SMALL, (LPARAM)m_hIcon16);
+    if (m_hIcon32)
+        SendMessage(inHandle, WM_SETICON, ICON_BIG, (LPARAM)m_hIcon32);
+    if (m_hIcon16)
+        SendMessage(inHandle, WM_SETICON, ICON_SMALL, (LPARAM)m_hIcon16);
 }
 
 /******************************************************************************
@@ -35,13 +35,13 @@ void WindowsHelper::setIcon(const HWND& inHandle)
  *****************************************************************************/
 PBYTE WindowsHelper::getIconDirectory(const int& inResourceId)
 {
-	HMODULE hModule = GetModuleHandle(nullptr);
-	HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(inResourceId), RT_GROUP_ICON);
+    HMODULE hModule = GetModuleHandle(nullptr);
+    HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(inResourceId), RT_GROUP_ICON);
 
-	HGLOBAL hData = LoadResource(hModule, hResource);
-	PBYTE data = (PBYTE)LockResource(hData);
+    HGLOBAL hData = LoadResource(hModule, hResource);
+    PBYTE data = (PBYTE)LockResource(hData);
 
-	return data;
+    return data;
 }
 
 /******************************************************************************
@@ -50,16 +50,16 @@ PBYTE WindowsHelper::getIconDirectory(const int& inResourceId)
  *****************************************************************************/
 HICON WindowsHelper::getIconFromIconDirectory(const PBYTE& inIconDirectory, const uint& inSize)
 {
-	HMODULE hModule = GetModuleHandle(nullptr);
-	int resourceId = LookupIconIdFromDirectoryEx(inIconDirectory, TRUE, inSize, inSize, LR_DEFAULTCOLOR);
-	HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(resourceId), RT_ICON);
+    HMODULE hModule = GetModuleHandle(nullptr);
+    int resourceId = LookupIconIdFromDirectoryEx(inIconDirectory, TRUE, inSize, inSize, LR_DEFAULTCOLOR);
+    HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(resourceId), RT_ICON);
 
-	HGLOBAL hData = LoadResource(hModule, hResource);
-	PBYTE data = (PBYTE)LockResource(hData);
-	DWORD sizeofData = SizeofResource(hModule, hResource);
+    HGLOBAL hData = LoadResource(hModule, hResource);
+    PBYTE data = (PBYTE)LockResource(hData);
+    DWORD sizeofData = SizeofResource(hModule, hResource);
 
-	HICON icon = CreateIconFromResourceEx(data, sizeofData, TRUE, 0x00030000, inSize, inSize, LR_DEFAULTCOLOR);
-	return icon;
+    HICON icon = CreateIconFromResourceEx(data, sizeofData, TRUE, 0x00030000, inSize, inSize, LR_DEFAULTCOLOR);
+    return icon;
 }
 
 #endif

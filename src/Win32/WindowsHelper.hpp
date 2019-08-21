@@ -4,17 +4,16 @@
 class WindowsHelper
 {
 public:
-	WindowsHelper();
+    WindowsHelper();
 
-	void setIcon(const HWND& inHandle);
+    void setIcon(const HWND& inHandle);
 
 private:
-	PBYTE getIconDirectory(const int& inResourceId);
-	HICON getIconFromIconDirectory(const PBYTE& inIconDirectory, const uint& inSize);
+    PBYTE getIconDirectory(const int& inResourceId);
+    HICON getIconFromIconDirectory(const PBYTE& inIconDirectory, const uint& inSize);
 
-	HICON m_hIcon32;
-	HICON m_hIcon16;
-
+    HICON m_hIcon32;
+    HICON m_hIcon16;
 };
 
 #endif // WINDOWS_HELPER_HPP

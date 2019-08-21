@@ -4,7 +4,7 @@
 class LinuxHelper
 {
 public:
-	LinuxHelper();
+    LinuxHelper();
 };
 
 #endif // LINUX_HELPER_HPP

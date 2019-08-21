@@ -8,7 +8,7 @@
  *****************************************************************************/
 LinuxHelper::LinuxHelper()
 {
-	XInitThreads();
+    XInitThreads();
 }
 
 #endif

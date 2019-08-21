@@ -1,0 +1,6 @@
+namespace rbk
+{
+class StateManager
+{
+};
+}
